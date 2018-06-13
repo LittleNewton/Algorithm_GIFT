@@ -1,0 +1,241 @@
+模糊综合评判算法(C语言版本)2008年01月05日 星期六 22:24本算法评价集个数为5，评价因子个数为6，采用超标加权法计算权重，线性降半阶隶属函数
+
+#include <stdio.h>
+
+#define MatrixRows 5
+#define MatrixCols 6
+double CalculateAverage(int m,double a[MatrixRows][MatrixCols])    //计算平均值,m表示第m列的平均值
+{
+    double myResult;
+int i;
+
+myResult=0;
+        for(i=0;i<MatrixRows;i++)
+{
+   myResult+=a[i][m];
+}
+myResult=myResult/MatrixRows;
+
+   // printf("%lf\n",myResult);
+
+return myResult;
+}
+
+double EWeight(int m,double a[MatrixRows][MatrixCols],double b[MatrixCols]) //计算权重数组E,m为第m列的权重值
+{
+double Aver[MatrixCols] ; //m个含水层同一评价因子的平均值
+double EResult; //计算权重结果
+    double ETotal;      //归一划权重和
+    int i;
+for(i=0;i<MatrixCols;i++)
+{
+Aver[i]=CalculateAverage(i,a);
+}
+ETotal=0;
+for(i=0;i<MatrixCols;i++)
+{
+ETotal+=(b[i]/Aver[i]);
+}
+
+EResult=(b[m]/Aver[m])/ETotal;
+return EResult;
+}
+
+double Sort(int m,int n,double a[MatrixRows][MatrixCols])
+{
+double b[MatrixRows][MatrixCols];      //排序后的结果,对数组的每一个列中的四个数字进行从小到大排列
+int i,j,k;             //不可以直接对a[MatrixRows][MatrixCols]进行排序,因为是数组是传地址计算
+    for(i=0;i<MatrixRows;i++)     //
+for(j=0;j<MatrixCols;j++)
+   b[i][j]=a[i][j];
+
+for(j=0;j<MatrixCols;j++)
+{
+for(i=0;i<MatrixRows-1;i++)
+   for(k=i;k<MatrixRows;k++)
+   {
+        if(b[i][j]>b[k][j])      //排序
+    {
+     double tmp;
+        tmp=b[i][j];
+        b[i][j]=b[k][j];
+        b[k][j]=tmp;
+    }
+   }
+}
+return b[m][n];
+}
+
+
+double Lishudu(int m,int n,double a[MatrixRows][MatrixCols],double b[MatrixCols])     //计算当前样本b[MatrixCols]对各个评价因子的隶属度
+{                                                      
+double c[MatrixRows][MatrixCols];                     //排序后的结果
+double LSDResult[MatrixCols][MatrixRows];             //隶属度计算结果,即评价集与评价因子的关系矩阵
+int i,j,k;
+    for(i=0;i<MatrixRows;i++)
+for(j=0;j<MatrixCols;j++)
+{
+   c[i][j]=Sort(i,j,a);         //排序
+} 
+for(j=0;j<MatrixCols;j++)
+{
+for(i=0;i<MatrixRows;i++)
+{
+   for(k=0;k<MatrixRows;k++)
+   {
+    if(a[i][j]==c[k][j])
+    {
+     if(k==0)
+     {
+      if(b[j]<c[k][j])
+          LSDResult[j][i]=1;
+         if(b[j]>=c[k][j]&&b[j]<c[k+1][j])
+          LSDResult[j][i]=((c[k+1][j]-b[j])/(c[k+1][j]-c[k][j]));
+         if(b[j]>=c[k+1][j])
+                            LSDResult[j][i]=0;
+     }
+     if(k==1||k==2||k==3)
+     {
+      if(b[j]<c[k-1][j])
+       LSDResult[j][i]=0;
+      if(b[j]>=c[k-1][j]&&b[j]<c[k][j])
+       LSDResult[j][i]=((b[j]-c[k-1][j])/(c[k][j]-c[k-1][j]));
+      if(b[j]>=c[k][j]&&b[j]<c[k+1][j])
+       LSDResult[j][i]=((c[k+1][j]-b[j])/(c[k+1][j]-c[k][j]));
+                        if(b[j]>=c[k+1][j])
+       LSDResult[j][i]=0;
+     }
+     if(k==4)
+     {
+      if(b[j]<c[k-1][j])
+       LSDResult[j][i]=0;
+      if(b[j]>=c[k-1][j] && b[j]<c[k][j])
+       LSDResult[j][i]=((b[j]-c[k-1][j])/(c[k][j]-c[k-1][j]));
+      if(b[j]>=c[k][j])
+       LSDResult[j][i]=1;
+     }
+    }
+   }
+
+}
+}
+return LSDResult[m][n];   
+}
+
+
+double FuzzyEvalution(int x,int m,int n,double a[MatrixRows][MatrixCols],double b[MatrixCols])
+{
+double E[MatrixCols];       //超标加权法计算权重
+double R[MatrixCols][MatrixRows];    //评价集与评价因子关系矩阵
+    double FEResult[MatrixRows];//最终计算对各个评价集的隶属度
+int i,j;
+for(i=0;i<MatrixCols;i++)
+for(j=0;j<MatrixRows;j++)
+{
+         R[i][j]=Lishudu(i,j,a,b); //函数参数a[MatrixRows][MatrixCols]，得到的计算结果为MatrixCols X MatrixRows矩阵
+}
+    for(i=0;i<MatrixCols;i++)
+{
+E[i]=EWeight(i,a,b);
+}
+
+for(i=0; i<MatrixRows;i++)
+{
+FEResult[i]=0;
+for(j=0;j<MatrixCols;j++)
+{
+   FEResult[i]+=E[j]*R[j][i];
+}
+}
+
+return FEResult[x];
+}
+
+void main()
+{
+double a[MatrixRows][MatrixCols];       //保存评价集标注值 
+double b[MatrixCols];          //保存待测出水点水样的值
+double myResult[MatrixRows];          //保存计算结果
+double myweight[MatrixCols];   //计算权重的结果
+double mysort[MatrixRows][MatrixCols]; //排序结果
+double myLiShuDu[MatrixCols][MatrixRows];//评判集和评判因子的关系矩阵
+int i,j;
+//////////////////////////////////////////////////////////////////////////
+printf("请输入评判集标准值:\n");
+for(i=0;i<MatrixRows;i++)
+{   
+printf("请输入评判集 %d 的标准值:\n",i+1);
+for(j=0;j<MatrixCols;j++)
+{
+   scanf("%lf",&a[i][j]);
+}
+}
+
+
+    printf("评判集标准值输出：\n");
+for(i=0;i<MatrixRows;i++)
+{
+for(j=0;j<MatrixCols;j++)
+   printf("%lf, ",a[i][j]);
+printf("\n");
+}
+
+printf("请输入出水点水样的值:\n");
+for(i=0;i<MatrixCols;i++)
+{
+scanf("%lf",&b[i]);
+}
+   ////////////////////////////////////////////////////////////////////////////
+for(i=0;i<MatrixCols;i++)       //计算权重数组
+{
+        myweight[i]=EWeight(i,a,b);
+}
+printf("输出一维数组权重值:\n");
+for(j=0;j<MatrixCols;j++)         //输出权重一维数组
+        printf("%lf\n",myweight[j]);
+   /////////////////////////////////////////////////////////////////////////
+
+
+for(i=0;i<MatrixRows;i++)        //计算a[MatrixRows][MatrixCols]每一列中的四个数字排序（为计算隶属函数，隶属度准备）
+{
+for(j=0;j<MatrixCols;j++)
+{
+   mysort[i][j]=Sort(i,j,a);
+}
+}
+printf("输出a[MatrixRows][MatrixCols]每一列中的四个数字排序后的结果:\n");
+for(i=0;i<MatrixRows;i++)        //输出a[MatrixRows][MatrixCols]每一列中的四个数字排序后的结果
+{
+for(j=0;j<MatrixCols;j++)
+{
+      printf("%lf,   ",mysort[i][j]);
+}
+printf("\n");
+}
+    /////////////////////////////////////////////////////////////////////////
+printf("评判集和评判因子的关系矩阵:\n");
+for(i=0;i<MatrixCols;i++)
+for(j=0;j<MatrixRows;j++)
+{
+   myLiShuDu[i][j]=Lishudu(i,j,a,b);
+}
+for(i=0;i<MatrixCols;i++)
+{
+for(j=0;j<MatrixRows;j++)
+{
+   printf("%lf, ",myLiShuDu[i][j]);
+}
+printf("\n");
+}
+/////////////////////////////////////////////////////////////////////////
+for(i=0;i<MatrixRows;i++)
+{
+myResult[i]=FuzzyEvalution(i,MatrixRows,MatrixCols,a,b); //模糊综合评判
+}
+printf("以下为运算结果:\n");
+for(i=0;i<MatrixRows;i++)
+{
+printf("%lf, \n",myResult[i]);
+}
+}
+ 

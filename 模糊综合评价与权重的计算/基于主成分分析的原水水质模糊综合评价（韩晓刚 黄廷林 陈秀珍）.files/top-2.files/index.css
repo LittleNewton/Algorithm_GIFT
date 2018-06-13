@@ -1,0 +1,105 @@
+.font12pxwhite {
+	FONT-SIZE: 12px; COLOR: #ffffff; LINE-HEIGHT: 26px; FONT-FAMILY: "宋体"
+}
+.font12pxblack {
+	FONT-SIZE: 12px; COLOR: #000000; FONT-FAMILY: "宋体"
+}
+.font12pxred {
+	FONT-SIZE: 12px; COLOR: #ff0000; FONT-FAMILY: "宋体"
+}
+.font12pxgreen {
+	FONT-SIZE: 12px; COLOR: #2a7b38; LINE-HEIGHT: 26px; FONT-FAMILY: "宋体"
+}
+.searchinput {
+	BORDER-RIGHT: #000000 1px solid; BORDER-TOP: #000000 1px solid; FONT-SIZE: 12px; BORDER-LEFT: #000000 1px solid; BORDER-BOTTOM: #000000 1px solid; FONT-FAMILY: "宋体"
+}
+.smsinput {
+	BORDER-RIGHT: #000000 1px solid; BORDER-TOP: #000000 1px solid; FONT-SIZE: 10px; BORDER-LEFT: #000000 1px solid; BORDER-BOTTOM: #000000 1px solid; FONT-FAMILY: "Arial", "Helvetica", "sans-serif"
+}
+.searchbutton {
+	BORDER-RIGHT: #000000 1px solid; BORDER-TOP: #000000 1px solid; FONT-SIZE: 12px; BORDER-LEFT: #000000 1px solid; WIDTH: 24pt; BORDER-BOTTOM: #000000 1px solid; FONT-FAMILY: "宋体"; HEIGHT: 12pt; BACKGROUND-COLOR: #ffffff
+}
+A.whitelink {
+	FONT-SIZE: 12px; COLOR: #ffffff; LINE-HEIGHT: 16px; FONT-FAMILY: "宋体"; TEXT-DECORATION: none
+}
+A.whitelink:hover {
+	FONT-SIZE: 12px; COLOR: #ffffff; FONT-FAMILY: "宋体"; TEXT-DECORATION: underline
+}
+A.blacklink {
+	FONT-SIZE: 12px; COLOR: #000000; LINE-HEIGHT: 18px; FONT-FAMILY: "宋体"; TEXT-DECORATION: none
+}
+A.blacklink:hover {
+	FONT-SIZE: 12px; COLOR: #000000; FONT-FAMILY: "宋体"; TEXT-DECORATION: underline
+}
+A.greenlink {
+	FONT-SIZE: 12px; COLOR: #2a7b38; FONT-FAMILY: "宋体"; TEXT-DECORATION: none
+}
+A.blacklink2 {
+	FONT-SIZE: 12px; COLOR: #000000; LINE-HEIGHT: 20px; FONT-FAMILY: "宋体"; TEXT-DECORATION: underline
+}
+A.whitelink2 {
+	FONT-SIZE: 12px; COLOR: #ffffff; FONT-FAMILY: "宋体"; TEXT-DECORATION: underline
+}
+A.greenlink:hover {
+	FONT-SIZE: 12px; COLOR: #2a7b38; FONT-FAMILY: "宋体"; TEXT-DECORATION: underline
+}
+.tableborder {
+	BORDER-RIGHT: #000000 1px solid; BORDER-TOP: #000000 1px solid; BORDER-LEFT: #000000 1px solid; BORDER-BOTTOM: #000000 1px solid
+}
+.tableborder2 {
+	BORDER-RIGHT: #000000 1px solid; BORDER-TOP: #000000 1px; BORDER-LEFT: #000000 1px solid; BORDER-BOTTOM: #000000 1px solid
+}
+.enfontblack {
+	FONT-SIZE: 10px; COLOR: #000000; LINE-HEIGHT: 12px; FONT-FAMILY: "Arial", "Helvetica", "sans-serif"
+}
+A.enfontblack {
+	FONT-SIZE: 10px; COLOR: #000000; LINE-HEIGHT: 12px; FONT-FAMILY: "Arial", "Helvetica", "sans-serif"; TEXT-DECORATION: none
+}
+A.enfontblack:hover {
+	FONT-SIZE: 10px; COLOR: #000000; LINE-HEIGHT: 12px; FONT-FAMILY: "Arial", "Helvetica", "sans-serif"; TEXT-DECORATION: underline
+}
+.fonttahoma {
+	FONT-SIZE: 12px; COLOR: #ffffff; FONT-FAMILY: "Tahoma"
+}
+.font12pxwhite2 {
+	FONT-SIZE: 12px; COLOR: #ffffff; FONT-FAMILY: "宋体"
+}
+.underlinewhite {
+	FONT-SIZE: 12px; COLOR: #ffffff; FONT-FAMILY: "宋体"; TEXT-DECORATION: underline
+}
+.font12pxwhite3 {
+	FONT-SIZE: 12px; COLOR: #ffffff; LINE-HEIGHT: 16px; FONT-FAMILY: "宋体"
+}
+.titlefont {
+	FONT-SIZE: 16px; COLOR: #ff0000; FONT-FAMILY: "黑体"; TEXT-DECORATION: underline
+}
+.font14pxblack {
+	FONT-SIZE: 14px; COLOR: #000000; FONT-FAMILY: "宋体"; LETTER-SPACING: 6px
+}
+.font14pxgreen {
+	FONT-SIZE: 14px; COLOR: #459e53; FONT-FAMILY: "宋体"
+}
+.webdings {
+	FONT-SIZE: 12px; COLOR: #2a7b38; FONT-FAMILY: "Webdings"; TEXT-DECORATION: none
+}
+.font12pxgreenblod {
+	FONT-WEIGHT: bold; FONT-SIZE: 12px; COLOR: #2a7b38; TEXT-DECORATION: none
+}
+.font14pxred {
+	FONT-SIZE: 14px; COLOR: #a13636; TEXT-DECORATION: none
+}
+.font14pxgreen {
+	FONT-SIZE: 14px; COLOR: #005310; TEXT-DECORATION: none
+}
+.font12pxgreen {
+	FONT-SIZE: 12px; COLOR: #005310; LINE-HEIGHT: 20px; TEXT-DECORATION: none
+}
+.font12pxwhiteblod {
+	FONT-WEIGHT: bold; FONT-SIZE: 12px; COLOR: #ffffff; TEXT-DECORATION: none
+}
+.text {
+	BORDER-RIGHT: #cccccc 2px solid; BORDER-TOP: #cccccc 2px solid; BORDER-LEFT: #cccccc 2px solid; BORDER-BOTTOM: #cccccc 2px solid
+}
+.text1 {
+	BORDER-RIGHT: #999999 1px solid; BORDER-TOP: #999999 1px solid; BORDER-LEFT: #999999 1px solid; BORDER-BOTTOM: #999999 1px solid
+}
